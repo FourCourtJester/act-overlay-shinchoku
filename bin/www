@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+
+/**
+ * Normalize a port into a number, string, or false.
+ * @param {Number|String} val 
+ * @return {*}
+ */
+function normalizePort (val) {
+    const p = parseInt(val, 10)
+
+    // named pipe
+    if (isNaN(p)) return val
+
+    // port number
+    if (p >= 0) return p
+
+    return false
+}
+
+/**
+ * Module dependencies.
+ */
+
+const
+    app = require('../app'),
+    fs = require('fs-extra'),
+    http = require('http'),
+    port = normalizePort(process.env.PORT || '3000')
+
+/**
+ * Save required files for public viewing
+ */
+try {
+    fs.copy('./node_modules/jquery/dist/jquery.min.js', './public/javascripts/dist/jquery/jquery.min.js')
+    fs.copy('./node_modules/mustache/mustache.min.js', './public/javascripts/dist/mustache/mustache.min.js')
+    fs.copy('./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', './public/javascripts/dist/bootstrap/bootstrap.bundle.min.js')
+    fs.copy('./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map', './public/javascripts/dist/bootstrap/bootstrap.bundle.min.js.map')
+} catch (err) {
+    console.error(err)
+}
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+app.set('port', port)
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer(app)
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port)
+
+/**
+ * Event listener for HTTP server "error" event.
+ * @param {Object} error 
+ */
+server.on('error', (error) => {
+    if (error.syscall !== 'listen') throw error
+
+    const bind = typeof port === 'string' ?
+        'Pipe ' + port :
+        'Port ' + port
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+    case 'EACCES':
+        console.error(bind + ' requires elevated privileges')
+        process.exit(1)
+        break
+    case 'EADDRINUSE':
+        console.error(bind + ' is already in use')
+        process.exit(1)
+        break
+    default:
+        throw error
+    }
+})

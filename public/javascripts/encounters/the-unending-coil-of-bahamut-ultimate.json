@@ -1,0 +1,41 @@
+{
+    "display_name": "The Unending Coil of Bahamut (Ultimate)",
+    "type": "Ultimate",
+    "splash": "https://xivapi.com/i/112000/112261.png",
+    "timeline": [
+        {
+            "trigger": null,
+            "foe": "Twintania"
+        },
+        {
+            "trigger": "Ragnarok[|:][\\w]{4}[|:]Heavensfall[|:]",
+            "foe": "Nael Deus Darnus",
+            "example": "Ragnarok:26B8:Heavensfall"
+        },
+        {
+            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "foe": "Nael Deus Darnus: First Quote",
+            "example": "00:0044:Nael deus Darnus:"
+        },
+        {
+            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "foe": "Nael Deus Darnus: Second Quote",
+            "example": "00:0044:Nael deus Darnus:"
+        },
+        {
+            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "foe": "Nael Deus Darnus: Third Quote",
+            "example": "00:0044:Nael deus Darnus:"
+        },
+        {
+            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "foe": "Nael Deus Darnus: Fourth &amp; Fifth Quotes",
+            "example": "00:0044:Nael deus Darnus:"
+        },
+        {
+            "trigger": "Bahamut Prime[|:][\\w]{4}[|:]Seventh Umbral Era[|:]",
+            "foe": "Bahamut Prime",
+            "example": "Bahamut Prime:26D1:Seventh Umbral Era"
+        }
+    ]
+}

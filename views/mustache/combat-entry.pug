@@ -1,0 +1,6 @@
+script#mustache-combat-entry(type="x-tmpl-mustache")
+    | {{#items}}
+    span.text-center(data-sort="{{encdps}}")
+        img.d-block.mh-100.mw-100(src="./public/images/jobs/{{job}}.png")
+        span {{encdps-*}}
+    | {{/items}}

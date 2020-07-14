@@ -1,0 +1,15 @@
+// Themes
+$ffxiv-role-colors: (
+    "tanking": #84bdf8,
+    "damage": #f84d44,
+    "healing": #84f8Bd,
+);
+
+// Base Bootstrap
+@import '../../../node_modules/bootstrap/scss/variables';
+
+$theme-colors: map-merge($ffxiv-role-colors, $theme-colors);
+
+// Text Classes
+$text-color:rgba(255, 255, 255, 0.8);
+$text-fade-color: rgba(255, 255, 255, 0.33);

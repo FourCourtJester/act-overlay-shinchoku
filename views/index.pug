@@ -1,0 +1,46 @@
+doctype html
+html.kyaputen-summary
+  //- Header
+  include tpl/head
+  body.container-fluid.d-flex.flex-column.justify-content-start.align-items-start.p-2.active.resize
+    div.row.no-gutters.mh-100.w-100
+      //- Decorative wrap
+      div.wrap-viewport.col-12.mh-100.p-1
+        //- Decorative inner wrap
+        div.inner-wrap-viewport.h-100.w-100.p-2
+          //- Header
+          div.headline.d-flex.flex-row.justify-content-between.align-items-center
+            div.text-nowrap.text-truncate
+              img#encounter-icon.mr-2(src="./public/images/icons/encounter-unknown.png")
+              var#encounter-title
+              | &nbsp;
+              span#encounter-difficulty
+          div.info.position-relative.mt-2
+            //- Background Image
+            div.splash
+              img#encounter-image.w-100
+            div.data.position-absolute.d-flex.flex-column.justify-content-start.align-items-center.px-3.py-2.overflow-hidden.w-100.h-100
+              //- Current Foe & Group Numbers
+              div.title.d-flex.flex-row.justify-content-between.align-items-center.w-100
+                span#current-foe
+                  img.mr-2(src="./public/images/icons/symbol-monster.png")
+                  span
+                span
+                  span.mr-2 💀
+                  span#combat-deaths 0
+                  img(src="./public/images/icons/symbol-dps.png")
+                  span#combat-total 0
+              //- DPS Meter
+              div#combat-meter.meter.d-flex.flex-row.flex-shrink-1.justify-content-around.align-items-center.flex-grow-1.flex-shrink-1.overflow-hidden.my-2.w-100
+              //- Combat Numbers
+              div.summary.d-flex.flex-row.flex-shrink-1.justify-content-between.align-items-center.w-100
+                span
+                  img.mr-1(src="./public/images/icons/symbol-clock.png")
+                  strong#combat-time 00:00
+                span
+                  span Attempts Today • 
+                  strong#summary-attempts.mr-2 0
+                  span Best • 
+                  strong#summary-best N/A
+  //- Templates
+  include /views/mustache/combat-entry
