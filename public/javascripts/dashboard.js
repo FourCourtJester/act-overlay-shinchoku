@@ -276,7 +276,13 @@ class ShinchokuDashboard {
 
                 return combatant
             }),
-        }))).slice(0, 7)
+        }))).slice(0, 8).sort((a, b) => {
+            const
+                val_a = +$(a).data('sort'),
+                val_b = +$(b).data('sort')
+
+            return val_a > val_b ? -1 : (val_a < val_b ? 1 : 0)
+        })
 
         $('#combat-meter').empty().append($entries)
     }
