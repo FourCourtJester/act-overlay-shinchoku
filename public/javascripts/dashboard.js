@@ -21,7 +21,26 @@ class ShinchokuDashboard {
      */
     init () {
         // DOM Elements
-        this.elements = {}
+        this.$elements = {
+            encounter: {
+                title: $('#encounter-title'),
+                image: $('#encounter-image'),
+                difficulty: $('#encounter-difficulty'),
+                icon: $('#encounter-icon'),
+            },
+            summary: {
+                attempts: $('#summary-attempts'),
+                best: $('#summary-best'),
+            },
+            combat: {
+                total: $('#combat-total'),
+                deaths: $('#combat-deaths'),
+                time: $('#combat-time'),
+                meter: $('#combat-meter'),
+            },
+            foe: $('#current-foe span'),
+            mustache: $('#mustache-combat-entry').html(),
+        }
 
         // Encounters
         // Master list - Remove entries as encounter scripts are developed
@@ -177,13 +196,27 @@ class ShinchokuDashboard {
      * Window Load
      */
     onLoad () {
-        Utils.setElementValue($('#encounter-title'), this.combat.default.title)
-        Utils.setElementValue($('#encounter-image'), this.encounters.unknown)
+        Utils.setElementValue(this.$elements.encounter.title, this.combat.default.title)
+        Utils.setElementValue(this.$elements.encounter.image, this.encounters.unknown)
 
         this.listeners()
     }
 
     // Functions
+
+    /**
+     * 
+     * @param {JQuery} a 
+     * @param {JQuery} b 
+     * @return {Number}
+     */
+    _sort (a, b) {
+        const
+            val_a = +$(a).data('sort'),
+            val_b = +$(b).data('sort')
+
+        return val_a > val_b ? -1 : (val_a < val_b ? 1 : 0)
+    }
 
     /**
      * 
@@ -195,6 +228,7 @@ class ShinchokuDashboard {
         this.combat.active = true
         this.combat.title = (new URLSearchParams(location.search)).get('z') ? (new URLSearchParams(location.search)).get('z') : encounter.CurrentZoneName
         this.combat.slug = Utils.slugify(this.combat.title)
+        this.combat.win = null
 
         try {
             const f = $.getJSON(`./public/javascripts/encounters/${this.combat.slug}.json`)
@@ -204,12 +238,12 @@ class ShinchokuDashboard {
                 .then(([data]) => {
                     this.combat.type = data.type
                     this.combat.splash = data.splash ? data.splash : this.encounters.unknown
+                    this.combat.win = new RegExp(data.win)
                     this.combat.timeline = data.timeline.map((t) => {
                         if (t.trigger) t.trigger = new RegExp(t.trigger)
                         return t
                     })
 
-                    this.updateTitle()
                     this.updateEncounter()
                 })
                 .catch((err) => {
@@ -218,8 +252,10 @@ class ShinchokuDashboard {
                     this.combat.type = 'unknown'
                     this.combat.splash = this.encounters[this.combat.slug] ? this.encounters[this.combat.slug] : this.encounters.unknown
 
-                    this.updateTitle()
                     this.updateEncounter({ foe: encounter.title })
+                })
+                .finally(() => {
+                    this.updateTitle()
                 })
         } catch (err) {
             console.error(err)
@@ -231,7 +267,7 @@ class ShinchokuDashboard {
      * @param {Object} [foe]
      */
     updateEncounter (foe = false) {
-        Utils.setElementValue($('#current-foe span'), foe ? foe.foe : this.combat.timeline.shift().foe)
+        Utils.setElementValue(this.$elements.foe, foe ? foe.foe : this.combat.timeline.shift().foe)
     }
 
     /**
@@ -243,18 +279,18 @@ class ShinchokuDashboard {
             difficulty = title.pop()
 
         if (/\([\w]*\)/.test(difficulty)) {
-            Utils.setElementValue($('#encounter-title'), title.join(' '))
-            Utils.setElementValue($('#encounter-difficulty'), difficulty)
+            Utils.setElementValue(this.$elements.encounter.title, title.join(' '))
+            Utils.setElementValue(this.$elements.encounter.difficulty, difficulty)
         } else {
-            Utils.setElementValue($('#encounter-title'), this.combat.title)
-            Utils.setElementValue($('#encounter-difficulty'), '')
+            Utils.setElementValue(this.$elements.encounter.title, this.combat.title)
+            Utils.setElementValue(this.$elements.encounter.difficulty, '')
         }
 
-        Utils.setElementValue($('#encounter-icon'), `./public/images/icons/encounter-${Utils.slugify(this.combat.type)}.png`)
-        Utils.setElementValue($('#encounter-image'), this.combat.splash)
+        Utils.setElementValue(this.$elements.encounter.icon, `./public/images/icons/encounter-${Utils.slugify(this.combat.type)}.png`)
+        Utils.setElementValue(this.$elements.encounter.image, this.combat.splash)
 
-        Utils.setElementValue($('#summary-attempts'), +window.sessionStorage.getItem(`shinchoku.${this.combat.slug}.attempts`) || 0)
-        Utils.setElementValue($('#summary-best'), window.sessionStorage.getItem(`shinchoku.${this.combat.slug}.best.timestamp`) || 'N/A')
+        Utils.setElementValue(this.$elements.summary.attempts, +window.sessionStorage.getItem(`shinchoku.${this.combat.slug}.attempts`) || 0)
+        Utils.setElementValue(this.$elements.summary.best, window.sessionStorage.getItem(`shinchoku.${this.combat.slug}.best.timestamp`) || 'N/A')
     }
 
     /**
@@ -263,28 +299,18 @@ class ShinchokuDashboard {
      * @param {Object} combatants
      */
     async updateCombat (encounter, combatants) {
-        // this.combat.combatants = Object.values(combatants)
+        Utils.setElementValue(this.$elements.combat.total, new Intl.NumberFormat().format(encounter['encdps']))
+        Utils.setElementValue(this.$elements.combat.deaths, encounter.deaths)
+        Utils.setElementValue(this.$elements.combat.time, encounter.duration)
 
-        Utils.setElementValue($('#combat-total'), new Intl.NumberFormat().format(encounter['encdps']))
-        Utils.setElementValue($('#combat-deaths'), encounter.deaths)
-        Utils.setElementValue($('#combat-time'), encounter.duration)
-
-        const $entries = ($(Mustache.render($('#mustache-combat-entry').html(), {
+        this.$elements.combat.meter.empty().append(($(Mustache.render(this.$elements.mustache, {
             items: Object.values(combatants).map((combatant) => {
                 combatant.uuid = `combatant-${Utils.slugify(combatant.name)}`
                 combatant.job = combatant.Job.length ? combatant.Job.toUpperCase() : Utils.in(combatant.name, '(') ? '-pet' : '-limit-break'
 
                 return combatant
             }),
-        }))).slice(0, 8).sort((a, b) => {
-            const
-                val_a = +$(a).data('sort'),
-                val_b = +$(b).data('sort')
-
-            return val_a > val_b ? -1 : (val_a < val_b ? 1 : 0)
-        })
-
-        $('#combat-meter').empty().append($entries)
+        }))).sort(this._sort)).slice(0, 8)
     }
 
     /**
@@ -305,8 +331,8 @@ class ShinchokuDashboard {
             window.sessionStorage.setItem(`shinchoku.${slug}.best.timestamp`, encounter.duration)
         }
 
-        Utils.setElementValue($('#summary-attempts'), window.sessionStorage.getItem(`shinchoku.${slug}.attempts`))
-        Utils.setElementValue($('#summary-best'), window.sessionStorage.getItem(`shinchoku.${slug}.best.timestamp`))
+        Utils.setElementValue(this.$elements.summary.attempts, window.sessionStorage.getItem(`shinchoku.${slug}.attempts`))
+        Utils.setElementValue(this.$elements.summary.best, window.sessionStorage.getItem(`shinchoku.${slug}.best.timestamp`))
     }
 
     // Socket Events
@@ -315,7 +341,7 @@ class ShinchokuDashboard {
      * Handles a CombatData event
      * @return {Boolean}
      */
-    _onCombatData ({ type: type, Encounter: encounter, Combatant: combatants, isActive: active }) {
+    async _onCombatData ({ type: type, Encounter: encounter, Combatant: combatants, isActive: active }) {
         // Convert all types to Boolean
         active = String(active).toString().toLowerCase() == 'true'
 
@@ -338,7 +364,17 @@ class ShinchokuDashboard {
      * Handles a Chat event
      * @return {Boolean}
      */
-    _onChat ({ type: type, line: line, rawLine: raw }) {
+    async _onChat ({ type: type, line: line, rawLine: raw }) {
+        if (this.combat.win && this.combat.win.test(raw)) {
+            const slug = this.encounters[this.combat.slug] ? this.combat.slug : `unknown-${Utils.generateUUID()}`
+
+            window.sessionStorage.setItem(`shinchoku.${slug}.best`, 9999)
+            window.sessionStorage.setItem(`shinchoku.${slug}.best.timestamp`, 'Victory')
+            Utils.setElementValue(this.$elements.summary.best, window.sessionStorage.getItem(`shinchoku.${slug}.best.timestamp`))
+
+            console.log('Win detected')
+        }
+
         if (!this.combat.timeline.length) return false
         if (this.combat.timeline[0].trigger.test(raw)) this.updateEncounter()
 

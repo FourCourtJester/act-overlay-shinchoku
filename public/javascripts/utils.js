@@ -117,7 +117,7 @@ class KyaputenToolkit {
             const [short_field, key] = field.match(/\w+\b/g)
 
             // If the prop does not exist, create it
-            if (!obj.hasOwnProperty(short_field)) {
+            if (!Object.prototype.hasOwnProperty.call(obj, short_field)) {
                 obj[short_field] = []
             }
 
@@ -135,7 +135,7 @@ class KyaputenToolkit {
         }
 
         // If the prop does not exist, create it
-        if (!obj.hasOwnProperty(field)) obj[field] = {}
+        if (!Object.hasOwnProperty.call(obj, field)) obj[field] = {}
 
         // When there is no more depth to recurse, assign the value
         if (!path.length) {

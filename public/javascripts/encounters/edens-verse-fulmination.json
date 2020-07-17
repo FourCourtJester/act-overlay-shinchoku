@@ -1,0 +1,12 @@
+{
+    "display_name": "Eden's Verse: Fulmination",
+    "type": "Raid",
+    "splash": "https://xivapi.com/i/112000/112385.png",
+    "timeline": [
+        {
+            "trigger": null,
+            "foe": "Ramuh"
+        }
+    ],
+    "win": "[\\w]{2}[|:][\\w]{4}[|:]Eden's Verse: Fulmination has ended"
+}
