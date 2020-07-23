@@ -29,7 +29,7 @@
         },
         {
             "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
-            "foe": "Nael Deus Darnus: Fourth & Final Quotes",
+            "foe": "Nael Deus Darnus: Fourth & Final Quote",
             "example": "00:0044:Nael deus Darnus:"
         },
         {
@@ -38,14 +38,14 @@
             "example": "Bahamut Prime:26D1:Seventh Umbral Era"
         },
         {
-            "trigger": ":[\\w]{4}[|:]Bahamut Prime readies Quickmarch Trio",
+            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Bahamut Prime readies Quickmarch Trio",
             "foe": "Bahamut Prime: Quickmarch Trio",
-            "example": "Bahamut Prime readies Quickmarch Trio"
+            "example": "00:282b:Bahamut Prime readies Quickmarch Trio"
         },
         {
-            "trigger": ":[\\w]{4}[|:]Bahamut Prime readies Blackfire Trio",
+            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Bahamut Prime readies Blackfire Trio",
             "foe": "Bahamut Prime: Blackfire Trio",
-            "example": "Bahamut Prime readies Blackfire Trio"
+            "example": "00:282b:Bahamut Prime readies Blackfire Trio"
         }
     ],
     "win": "[\\w]{2}[|:][\\w]{4}[|:]The Unending Coil of Bahamut \\(Ultimate\\) has ended"
