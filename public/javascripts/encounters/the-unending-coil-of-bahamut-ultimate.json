@@ -8,45 +8,45 @@
             "foe": "Twintania"
         },
         {
-            "trigger": "Ragnarok[|:][\\w]{4}[|:]Heavensfall[|:]",
+            "trigger": "Ragnarok[|:]\\w{4}[|:]Heavensfall[|:]",
             "foe": "Nael Deus Darnus",
             "example": "Ragnarok:26B8:Heavensfall"
         },
         {
-            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "trigger": "\\w{2}[|:]\\w{4}[|:]Nael deus Darnus[|:]",
             "foe": "Nael Deus Darnus: First Quote",
             "example": "00:0044:Nael deus Darnus:"
         },
         {
-            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "trigger": "\\w{2}[|:]\\w{4}[|:]Nael deus Darnus[|:]",
             "foe": "Nael Deus Darnus: Second Quote",
             "example": "00:0044:Nael deus Darnus:"
         },
         {
-            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "trigger": "\\w{2}[|:]\\w{4}[|:]Nael deus Darnus[|:]",
             "foe": "Nael Deus Darnus: Third Quote",
             "example": "00:0044:Nael deus Darnus:"
         },
         {
-            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Nael deus Darnus[|:]",
+            "trigger": "\\w{2}[|:]\\w{4}[|:]Nael deus Darnus[|:]",
             "foe": "Nael Deus Darnus: Fourth & Final Quote",
             "example": "00:0044:Nael deus Darnus:"
         },
         {
-            "trigger": "Bahamut Prime[|:][\\w]{4}[|:]Seventh Umbral Era[|:]",
+            "trigger": "Bahamut Prime[|:]\\w{4}[|:]Seventh Umbral Era[|:]",
             "foe": "Bahamut Prime",
             "example": "Bahamut Prime:26D1:Seventh Umbral Era"
         },
         {
-            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Bahamut Prime readies Quickmarch Trio",
+            "trigger": "[|:]Bahamut Prime starts using Quickmarch Trio",
             "foe": "Bahamut Prime: Quickmarch Trio",
             "example": "00:282b:Bahamut Prime readies Quickmarch Trio"
         },
         {
-            "trigger": "[\\w]{2}[|:][\\w]{4}[|:]Bahamut Prime readies Blackfire Trio",
+            "trigger": "[|:]Bahamut Prime starts using Blackfire Trio",
             "foe": "Bahamut Prime: Blackfire Trio",
             "example": "00:282b:Bahamut Prime readies Blackfire Trio"
         }
     ],
-    "win": "[\\w]{2}[|:][\\w]{4}[|:]The Unending Coil of Bahamut \\(Ultimate\\) has ended"
+    "win": "\\w{2}[|:]\\w{4}[|:]The Unending Coil of Bahamut \\(Ultimate\\) has ended"
 }
