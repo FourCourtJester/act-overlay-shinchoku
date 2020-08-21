@@ -46,6 +46,21 @@
             "trigger": "[|:]Bahamut Prime readies Blackfire Trio",
             "foe": "Bahamut Prime: Blackfire Trio",
             "example": "00|282b||Bahamut Prime readies Blackfire Trio."
+        },
+        {
+            "trigger": "[|:]Bahamut Prime readies Fellruin Trio",
+            "foe": "Bahamut Prime: Fellruin Trio",
+            "example": "00|282b||Bahamut Prime readies Fellruin Trio."
+        },
+        {
+            "trigger": "[|:]Bahamut Prime readies Heavensfall Trio",
+            "foe": "Bahamut Prime: Heavensfall Trio",
+            "example": "00|282b||Bahamut Prime readies Heavensfall Trio."
+        },
+        {
+            "trigger": "[|:]Bahamut Prime readies Tenstrike Trio",
+            "foe": "Bahamut Prime: Tenstrike Trio",
+            "example": "00|282b||Bahamut Prime readies Tenstrike Trio."
         }
     ],
     "win": "\\w{2}[|:]\\w{4}[|:]The Unending Coil of Bahamut \\(Ultimate\\) has ended"
