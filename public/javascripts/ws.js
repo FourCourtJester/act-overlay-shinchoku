@@ -60,9 +60,9 @@ class WS {
                 // Set the first connect flag to false to trigger re-subscriptions
                 this.settings.first_connect = false
 
-                // setTimeout(() => {
-                //     this.connect()
-                // }, this.settings.reconnect.interval)
+                setTimeout(() => {
+                    this.connect()
+                }, this.settings.reconnect.interval)
             })
 
             return true
