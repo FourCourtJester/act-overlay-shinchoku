@@ -69,7 +69,7 @@
         },
         {
             "trigger": "\\w{2}[|:]\\w{4}[|:]Nael deus Darnus[|:]",
-            "foe": "Bahamut Prime: Twintania & Nael deus Darnus",
+            "foe": "Twintania & Nael deus Darnus",
             "example": "00:0044:Nael deus Darnus:"
         }
     ],
