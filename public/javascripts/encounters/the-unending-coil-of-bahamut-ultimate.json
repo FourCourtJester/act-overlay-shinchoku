@@ -61,6 +61,16 @@
             "trigger": "[|:]Bahamut Prime readies Tenstrike Trio",
             "foe": "Bahamut Prime: Tenstrike Trio",
             "example": "00|282b||Bahamut Prime readies Tenstrike Trio."
+        },
+        {
+            "trigger": "[|:]Bahamut Prime readies Grand Octet",
+            "foe": "Bahamut Prime: Grand Octet",
+            "example": "00|282b||Bahamut Prime readies Octet."
+        },
+        {
+            "trigger": "\\w{2}[|:]\\w{4}[|:]Nael deus Darnus[|:]",
+            "foe": "Bahamut Prime: Twintania & Nael deus Darnus",
+            "example": "00:0044:Nael deus Darnus:"
         }
     ],
     "win": "\\w{2}[|:]\\w{4}[|:]The Unending Coil of Bahamut \\(Ultimate\\) has ended"
