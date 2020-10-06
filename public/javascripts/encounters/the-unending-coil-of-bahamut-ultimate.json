@@ -71,6 +71,11 @@
             "trigger": "\\w{2}[|:]\\w{4}[|:]Nael deus Darnus[|:]",
             "foe": "Twintania & Nael deus Darnus",
             "example": "00:0044:Nael deus Darnus:"
+        },
+        {
+            "trigger": "\\w{2}[|:]\\w{4}[|:]Bahamut Prime unleashes his inner rage!",
+            "foe": "Golden Bahamut Prime",
+            "example": "00:0839:Bahamut Prime unleashes his inner rage!"
         }
     ],
     "win": "\\w{2}[|:]\\w{4}[|:]The Unending Coil of Bahamut \\(Ultimate\\) has ended"
