@@ -74,7 +74,7 @@ class ShinchokuDashboard {
             'alphascape-v20-savage': 'https://xivapi.com/i/112000/112317.png',
             'alphascape-v30-savage': 'https://xivapi.com/i/112000/112318.png',
             'alphascape-v40-savage': 'https://xivapi.com/i/112000/112319.png',
-            'edens-gate-ressurection-savage': 'https://xivapi.com/i/112000/112351.png',
+            'edens-gate-resurrection-savage': 'https://xivapi.com/i/112000/112351.png',
             'edens-gate-inundation-savage': 'https://xivapi.com/i/112000/112355.png',
             'edens-gate-descent-savage': 'https://xivapi.com/i/112000/112353.png',
             'edens-gate-sepulture-savage': 'https://xivapi.com/i/112000/112357.png',
@@ -301,6 +301,9 @@ class ShinchokuDashboard {
     async _onCombatData ({ type: type, Encounter: encounter, Combatant: combatants, isActive: active }) {
         // Convert all types to Boolean
         active = String(active).toString().toLowerCase() == 'true'
+
+        // Ignore subsequent false combat readings
+        if (!this.combat.active && !active) return true
 
         // Start new combat
         if (!this.combat.active && active) {
