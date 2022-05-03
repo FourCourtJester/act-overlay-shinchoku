@@ -94,6 +94,7 @@ class ShinchokuDashboard {
             'the-unending-coil-of-bahamut-ultimate': 'https://xivapi.com/i/112000/112261.png',
             'the-weapons-refrain-ultimate': 'https://xivapi.com/i/112000/112296.png',
             'the-epic-of-alexander-ultimate': 'https://xivapi.com/i/112000/112374.png',
+            'dragonsongs-reprise-ultimate': 'https://xivapi.com/i/112000/112469.png',
         }
 
         // Combat log
